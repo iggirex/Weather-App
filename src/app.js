@@ -35,19 +35,19 @@ var app = angular.module("fiveDayWeather", [])
             forecast.push(obj);
             //console.log(forecast[i].precipitation);
         }
-          //console.log("this forecast: ", forecast);
+        console.log("this forecast: ", forecast);
     });
 });
 
 function kelvinToFar(kelvin){
+    if(isNaN(kelvin)){
+        return "Error: kelvin units passed in must be number type";
+    }
     return (((9/5)*(kelvin - 273.15) + 32).toFixed(0));
 }
 
 function mmRaintoInches(mm){
-    return mm / 25.4;
-}
-
-exports._test = {
-  kelvinToFar : kelvinToFar,
-  mmRaintoInches : mmRaintoInches
+    if(mm < 0){ return "Can't accept negative millimeters of rain";}
+    if(isNaN(mm)){ return "Must input a number for millimeters of rain";}
+    return Number((mm / 25.4).toFixed(2));
 }

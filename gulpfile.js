@@ -1,6 +1,7 @@
-var gulp = require("gulp");
-var uglify = require("gulp-uglify");
-var eslint = require("gulp-eslint");
+const gulp = require("gulp");
+const uglify = require("gulp-uglify");
+const eslint = require("gulp-eslint");
+const mocha = require("gulp-mocha");
 
 // gulp.task("scripts", function(){
 //     gulp.src("src/*.js")
@@ -16,6 +17,9 @@ gulp.task("eslint", function(){
     .pipe(eslint.failAfterError());
 });
 
-gulp.task("default", ["eslint"], function(){
-    //console.log("linter rrrunnningggg");
-});
+gulp.task("mocha", function(){
+  gulp.src("test/test.js", {read: false})
+  .pipe(mocha({reporter: "nyan"}))
+})
+
+gulp.task("default", ["eslint", "mocha"], function(){});
