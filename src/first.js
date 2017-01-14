@@ -1,3 +1,0 @@
-function myFirstFunction(){
-  return "first";
-}
