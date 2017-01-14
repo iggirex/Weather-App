@@ -18,7 +18,11 @@
   "homepage": "https://github.com/iggirex/Weather-App#readme",
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.1",
     "gulp-uglify": "^2.0.0"
+  },
+  "dependencies": {
+    "chai": "^3.5.0",
+    "gulp-eslint": "^3.0.1",
+    "mocha": "^3.2.0"
   }
 }
