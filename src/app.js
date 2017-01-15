@@ -3,7 +3,7 @@ var app = angular.module("fiveDayWeather", [])
 .controller("apiController", function($scope, $http){
     $scope.view = {};
     $http.get("http://api.openweathermap.org/data/2.5/forecast?q=denver,3166-2:US&appid=8982a42a6477a74e077b12cf8fcc5a06").then(function(data){
-        $scope.view.apiData = data;
+        // $scope.view.fiveWeatherObj = data;
         var rawData = data.data.list;
         var forecast = [];
         for (var i=0; i<rawData.length; i++){
@@ -63,6 +63,7 @@ var app = angular.module("fiveDayWeather", [])
                 thisDayTime.precipitation = precipitation === undefined ? 0 : precipitation;
 
                 forecast[forecast.length - 1].times.push(thisDayTime);
+                $scope.view.forecast = forecast;
             }
         }
         console.log("this forecast: ", forecast);
