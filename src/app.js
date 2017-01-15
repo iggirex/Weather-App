@@ -25,7 +25,11 @@ var app = angular.module("fiveDayWeather", [])
                 if(rawData[i].rain){
                     console.log(mmRaintoInches(rawData[i].rain["3h"]));
                     var precipitation = isNaN(mmRaintoInches(rawData[i].rain["3h"])) ? 0 :  mmRaintoInches(rawData[i].rain["3h"]);
-                };
+                }
+                if(rawData[i].snow){
+                    console.log(mmRaintoInches(rawData[i].snow["3h"]));
+                    precipitation = isNaN(mmRaintoInches(rawData[i].snow["3h"])) ? 0 :  mmRaintoInches(rawData[i].snow["3h"]);
+                }
 
                 thisDayObj.date = date;
                 thisDayTime.time = time;
@@ -44,11 +48,11 @@ var app = angular.module("fiveDayWeather", [])
 
                 if(rawData[i].rain){
                     console.log(mmRaintoInches(rawData[i].rain["3h"]));
-                    var precipitation = isNaN(mmRaintoInches(rawData[i].rain["3h"])) ? 0 :  mmRaintoInches(rawData[i].rain["3h"]);
+                    precipitation = isNaN(mmRaintoInches(rawData[i].rain["3h"])) ? 0 :  mmRaintoInches(rawData[i].rain["3h"]);
                 }
                 if(rawData[i].snow){
                     console.log(mmRaintoInches(rawData[i].snow["3h"]));
-                    var precipitation = isNaN(mmRaintoInches(rawData[i].snow["3h"])) ? 0 :  mmRaintoInches(rawData[i].snow["3h"]);
+                    precipitation = isNaN(mmRaintoInches(rawData[i].snow["3h"])) ? 0 :  mmRaintoInches(rawData[i].snow["3h"]);
                 }
 
                 thisDayTime.time = time;
