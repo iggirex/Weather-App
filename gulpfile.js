@@ -1,5 +1,4 @@
 const gulp = require("gulp");
-const uglify = require("gulp-uglify");
 const eslint = require("gulp-eslint");
 const mocha = require("gulp-mocha");
 
