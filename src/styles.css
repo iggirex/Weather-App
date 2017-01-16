@@ -44,6 +44,12 @@ table {
 }
 /*     end reset     */
 
+/** {
+    display: -moz-box;
+  	-webkit-box-sizing: border-box;
+  	-moz-box-sizing: border-box;
+  	box-sizing: border-box;
+}*/
 html {
     height: 100%;
 }
@@ -69,8 +75,9 @@ body {
     min-width: 600px;
   	min-height: calc(690px * (90/150));
   	height: 90vh;
-    display: -moz-box;
-    display: -ms-flexbox;
+    /*this below was messing up app on Firefox ????*/
+    /*display: -moz-box;
+    display: -ms-flexbox;*/
     justify-content: space-between;
     overflow: scroll;
 }
@@ -103,4 +110,7 @@ body {
 .highLow {
     color: black;
     font-size: 2.4vw;
+}
+.precipitation {
+    float: right;
 }

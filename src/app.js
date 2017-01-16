@@ -2,7 +2,7 @@
 var app = angular.module("fiveDayWeather", [])
 .controller("apiController", function($scope, $http){
     $scope.view = {};
-    $http.get("http://api.openweathermap.org/data/2.5/forecast?q=denver,3166-2:US&appid=8982a42a6477a74e077b12cf8fcc5a06").then(function(data){
+    $http.get("http://api.openweathermap.org/data/2.5/forecast?q=stockholm,3166-2:US&appid=8982a42a6477a74e077b12cf8fcc5a06").then(function(data){
         var rawData = data.data.list;
         var forecast = [];
         for (var i=0; i<rawData.length; i++){
