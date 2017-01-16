@@ -69,5 +69,5 @@ function kelvinToFar(kelvin){
 function mmRaintoInches(mm){
     if(mm < 0){ return "Can't accept negative millimeters of rain";}
     if(isNaN(mm)){ return "Must input a number for millimeters of rain";}
-    return Number((mm / 25.4).toFixed(4));
+    return Number((mm / 25.4).toFixed(2));
 }

@@ -27,9 +27,9 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	  display: block;
 }
-body {
+/*body {
   	line-height: 1;
-}
+}*/
 ol, ul {
 	  list-style: none;
 }
@@ -63,7 +63,11 @@ body {
 }
 .flexContainer {
     display: flex;
-    width: 100%;
+    min-width: 600px;
+  	/*max-width: 3580px;*/
+  	min-height: calc(690px * (90/150));
+  	height: 90vh;
+  	/*width: 150vh;*/
     /*display: -webkit-box;*/
     display: -moz-box;
     display: -ms-flexbox;
@@ -76,17 +80,18 @@ body {
     width: 40%;
     margin: 10px;
     display: block;
+    color: white;
     /*display: flex;*/
     /*flex-direction: column;*/
 }
 .repeatInfo {
-    margin: 10px;
-    background-color: yellow;
+    margin-top: 4vh;
+    background-color: brown;
 
 }
 .info {
     /*display: flex;*/
-    margin: 10px;
+    /*margin: 10px;*/
     background-color: blue;
     /*width: 80%;*/
     /*flex-direction: column;*/
@@ -96,4 +101,7 @@ body {
 }
 .time {
   font-size: 2.2vw;
+}
+.temp {
+  margin-left: 30%;
 }
