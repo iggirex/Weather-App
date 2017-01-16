@@ -18,19 +18,15 @@ var app = angular.module("fiveDayWeather", [])
             var thisDayObj = {};
             var thisDayTime = {};
 
-            if(forecast.length === 0 || rawData[i].dt_txt.substring(0, 10) !== forecast[forecast.length - 1].date){
-
+            // if the date of this iteration is new to forecast array, create a thisDayObj to represent a new day and thisDayTime to represent the first of the times in this day and its info.
+            if(forecast.length === 0 || date !== forecast[forecast.length - 1].date){
                 thisDayObj.times = [];
-                console.log("this be rain rite now", rawData[i].rain);
                 if(rawData[i].rain){
-                    console.log(mmRaintoInches(rawData[i].rain["3h"]));
                     var precipitation = isNaN(mmRaintoInches(rawData[i].rain["3h"])) ? 0 :  mmRaintoInches(rawData[i].rain["3h"]);
                 }
                 if(rawData[i].snow){
-                    console.log(mmRaintoInches(rawData[i].snow["3h"]));
                     precipitation = isNaN(mmRaintoInches(rawData[i].snow["3h"])) ? 0 :  mmRaintoInches(rawData[i].snow["3h"]);
                 }
-
                 thisDayObj.date = date;
                 thisDayTime.time = time;
                 thisDayTime.description = description;
@@ -41,20 +37,14 @@ var app = angular.module("fiveDayWeather", [])
                 thisDayObj.times.push(thisDayTime);
 
                 forecast.push(thisDayObj);
-
+            // if the date of this iteration already exists in forecast array, add thisTimeObj to thisDayObj.times array to represent a new time in the already existing day.
             } else if(rawData[i].dt_txt.substring(0, 10) === forecast[forecast.length - 1].date) {
-                // var thisDayTime = {};
-                // var time = rawData[i].dt_txt.substring(11, 13);
-
                 if(rawData[i].rain){
-                    console.log(mmRaintoInches(rawData[i].rain["3h"]));
                     precipitation = isNaN(mmRaintoInches(rawData[i].rain["3h"])) ? 0 :  mmRaintoInches(rawData[i].rain["3h"]);
                 }
                 if(rawData[i].snow){
-                    console.log(mmRaintoInches(rawData[i].snow["3h"]));
                     precipitation = isNaN(mmRaintoInches(rawData[i].snow["3h"])) ? 0 :  mmRaintoInches(rawData[i].snow["3h"]);
                 }
-
                 thisDayTime.time = time;
                 thisDayTime.icon = icon;
                 thisDayTime.description = description;
@@ -76,7 +66,6 @@ function kelvinToFar(kelvin){
     }
     return (((9/5)*(kelvin - 273.15) + 32).toFixed(0));
 }
-
 function mmRaintoInches(mm){
     if(mm < 0){ return "Can't accept negative millimeters of rain";}
     if(isNaN(mm)){ return "Must input a number for millimeters of rain";}
