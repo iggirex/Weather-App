@@ -2,13 +2,15 @@
 var app = angular.module("fiveDayWeather", [])
 .controller("apiController", function($scope, $http){
     $scope.view = {};
-    $http.get("http://api.openweathermap.org/data/2.5/forecast?q=denver,3166-2:US&appid=8982a42a6477a74e077b12cf8fcc5a06").then(function(data){
+    $http.get("http://api.openweathermap.org/data/2.5/forecast?q=beijing,3166-2:US&appid=8982a42a6477a74e077b12cf8fcc5a06").then(function(data){
         // $scope.view.fiveWeatherObj = data;
         var rawData = data.data.list;
         var forecast = [];
         for (var i=0; i<rawData.length; i++){
+            var conditionImage = "clear";
             //console.log(rawData[i]);
             var date = rawData[i].dt_txt.substring(0, 10);
+            console.log("index of fool!!!", rawData[i].dt_txt)
             var time = rawData[i].dt_txt.substring(11, 13);
             var description = rawData[i].weather[0].description;
             var temp = kelvinToFar(rawData[i].main.temp);
@@ -24,21 +26,24 @@ var app = angular.module("fiveDayWeather", [])
                 thisDayObj.times = [];
                 var high = -100;
                 var low = 100;
+                console.log("this is the undefined snow 3h", rawData[i].snow)
                 if(rawData[i].rain){
                     var precipitation = isNaN(mmRaintoInches(rawData[i].rain["3h"])) ? 0 :  mmRaintoInches(rawData[i].rain["3h"]);
-                    var conditionImage = "rain";
-                }
-                if(rawData[i].snow){
+                    conditionImage = "rain";
+                } else if(rawData[i].snow && rawData[i].snow["3h"]){
                     precipitation = isNaN(mmRaintoInches(rawData[i].snow["3h"])) ? 0 :  mmRaintoInches(rawData[i].snow["3h"]);
                     conditionImage = "snow";
                 }
-                // if(high === undefined || high < temp){
-                //     high = temp;
-                //     console.log(high)
-                // }
-                // if(low === undefined || low > temp){
-                //     low = temp;
-                // }
+                else {
+                    conditionImage = "clear"
+                }
+                console.log(conditionImage)
+                if(high === undefined || high < temp){
+                    high = temp;
+                }
+                if(low === undefined || low > temp){
+                    low = temp;
+                }
                 thisDayObj.date = date;
                 thisDayTime.time = time;
                 thisDayTime.description = description;
@@ -47,34 +52,33 @@ var app = angular.module("fiveDayWeather", [])
                 thisDayTime.temp = temp;
                 thisDayTime.precipitation = precipitation === undefined ? 0 : precipitation;
                 thisDayObj.times.push(thisDayTime);
-                thisDayObj.conditionImage = conditionImage;
+                console.log(conditionImage)
+                if(conditionImage){thisDayObj.conditionImage = conditionImage;}
+                // thisDayObj.conditionImage = conditionImage;
 
                 forecast.push(thisDayObj);
             // if the date of this iteration already exists in forecast array, add thisTimeObj to thisDayObj.times array to represent a new time in the already existing day.
             } else if(rawData[i].dt_txt.substring(0, 10) === forecast[forecast.length - 1].date) {
+              console.log("this is breaking: ", rawData[i])
+
                 if(rawData[i].rain){
                     precipitation = isNaN(mmRaintoInches(rawData[i].rain["3h"])) ? 0 :  mmRaintoInches(rawData[i].rain["3h"]);
                 }
-                if(rawData[i].snow){
+                else if(rawData[i].snow && rawData[i].snow["3h"]){
                     precipitation = isNaN(mmRaintoInches(rawData[i].snow["3h"])) ? 0 :  mmRaintoInches(rawData[i].snow["3h"]);
                 }
-                console.log("before final temp conditional, high is: ", high, "low is :", low)
                 if(high < temp){
                     high = temp;
-                    console.log("reassign high ", high)
                 }
                 if(low > temp){
                     low = temp;
-                    console.log("reassinging low", low)
                 }
-                console.log("AA444AAFFTERRRR33# final temp conditional, high is: ", high, "low is :", low)
                 thisDayTime.time = time;
                 thisDayTime.icon = icon;
                 thisDayTime.description = description;
                 thisDayTime.wind = {degree: windDegree, speed: windSpeed,};
                 thisDayTime.temp = temp;
                 thisDayTime.precipitation = precipitation === undefined ? 0 : precipitation;
-                console.log("putting in the thisDayObj high:  ",high, "and low: ", low)
                 thisDayTime.high = high;
                 thisDayTime.low = low;
 

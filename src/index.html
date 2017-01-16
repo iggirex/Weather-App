@@ -15,10 +15,15 @@
     <div ng-controller="apiController" class="apiController">
         <div class="flexContainer">
             <div class="weatherColumn" ng-repeat="data in view.forecast">
-                <div><h3 class="date">{{data.date}}</h3></div>
+
+                <div><h3 class="date">{{data.date | date : "EEEE"}}</h3></div>
                 <div>
-                    <!-- {{if data.conditionImage === "snow"}}
-                    <img src="http://media.gettyimages.com/videos/snowing-animation-loop-video-id163681818?s=640x640" alt="">
+                    <div ng-if="data.conditionImage === 'snow'">  <img class="condition" src="http://media.gettyimages.com/videos/snowing-animation-loop-video-id163681818?s=640x640" alt=""> </div>
+                    <div ng-if="data.conditionImage === 'clear'">  <img class="condition" src="http://il9.picdn.net/shutterstock/videos/10035458/thumb/7.jpg" alt=""> </div>
+                    <div ng-if="data.conditionImage === 'rain'">  <img class="condition" src="http://s3.amazonaws.com/hrnwp/wp-content/uploads/2016/11/rain-980076_960_720.jpg" alt=""> </div>
+                    <!-- {{if "data.conditionImage === 'snow'"}} -->
+                    <!-- <img src="http://media.gettyimages.com/videos/snowing-animation-loop-video-id163681818?s=640x640" alt=""> -->
+                    <!-- <p>we got snow!!!</p>
                     {{/if}} -->
                     {{data.times[data.times.length - 1].high}}/{{data.times[data.times.length - 1].low}}
 
