@@ -10,22 +10,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 </head>
 <body ng-app>
-    <div class="navbar">5 Day Weather</div>
+    <div class="navbar"><div class="navItem">Denver 5 Day Weather</div><div class="navItem" style="float:right;">iggirex@gmail.com</div></div>
 
     <div ng-controller="apiController" class="apiController">
         <div class="flexContainer">
             <div class="weatherColumn" ng-repeat="data in view.forecast">
-
                 <div class="date"><h3>{{data.date | date : "EEEE"}}</h3></div>
                 <div>
                     <div ng-if="data.conditionImage === 'snow'">  <img class="condition" src="http://media.gettyimages.com/videos/snowing-animation-loop-video-id163681818?s=640x640" alt=""> </div>
                     <div ng-if="data.conditionImage === 'clear'">  <img class="condition" src="http://il9.picdn.net/shutterstock/videos/10035458/thumb/7.jpg" alt=""> </div>
                     <div ng-if="data.conditionImage === 'rain'">  <img class="condition" src="http://s3.amazonaws.com/hrnwp/wp-content/uploads/2016/11/rain-980076_960_720.jpg" alt=""> </div>
-                    <!-- {{if "data.conditionImage === 'snow'"}} -->
-                    <!-- <img src="http://media.gettyimages.com/videos/snowing-animation-loop-video-id163681818?s=640x640" alt=""> -->
-                    <!-- <p>we got snow!!!</p>
-                    {{/if}} -->
-                    <!-- <script>console.log("on html putting high: ", high, "and low; ", low , "on page")</script> -->
                     <div class="highLow">
                         {{data.times[data.times.length - 1].high}}°/{{data.times[data.times.length - 1].low}}°
                     </div>
@@ -35,10 +29,7 @@
                         <div class="time"><h3>{{info.time}}:00   <span class="temp">{{info.temp}}°</span></h3></div>
                         <div class="cardInfo"></div>
                     </div>
-                      <!-- <div class="info"></div> -->
-                      <!-- <div class="info"></div> -->
                     <div class="info" ><i class="fa fa-camera-retro"></i> {{info.description}}&nbsp&nbsp&nbsp <span ng-show="info.precipitation">&#x2602{{info.precipitation}} in</span> </div>
-                    <!-- <div class="cardInfo">{{info.description}} </div> -->
                 </div>
             </div>
         </div>
