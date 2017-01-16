@@ -16,7 +16,7 @@
         <div class="flexContainer">
             <div class="weatherColumn" ng-repeat="data in view.forecast">
 
-                <div><h3 class="date">{{data.date | date : "EEEE"}}</h3></div>
+                <div class="date"><h3>{{data.date | date : "EEEE"}}</h3></div>
                 <div>
                     <div ng-if="data.conditionImage === 'snow'">  <img class="condition" src="http://media.gettyimages.com/videos/snowing-animation-loop-video-id163681818?s=640x640" alt=""> </div>
                     <div ng-if="data.conditionImage === 'clear'">  <img class="condition" src="http://il9.picdn.net/shutterstock/videos/10035458/thumb/7.jpg" alt=""> </div>
@@ -25,8 +25,10 @@
                     <!-- <img src="http://media.gettyimages.com/videos/snowing-animation-loop-video-id163681818?s=640x640" alt=""> -->
                     <!-- <p>we got snow!!!</p>
                     {{/if}} -->
-                    {{data.times[data.times.length - 1].high}}/{{data.times[data.times.length - 1].low}}
-
+                    <!-- <script>console.log("on html putting high: ", high, "and low; ", low , "on page")</script> -->
+                    <div class="highLow">
+                        {{data.times[data.times.length - 1].high}}°/{{data.times[data.times.length - 1].low}}°
+                    </div>
                 </div>
                 <div ng-repeat="info in data.times" class="repeatInfo">
                     <div class="dailyDetails">
@@ -42,7 +44,7 @@
         </div>
     </div>
 
-
+    <div class="footer">5 Day Weather</div>
     <script src="app.js"></script>
 </body>
 </html>

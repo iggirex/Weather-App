@@ -2,7 +2,7 @@
 var app = angular.module("fiveDayWeather", [])
 .controller("apiController", function($scope, $http){
     $scope.view = {};
-    $http.get("http://api.openweathermap.org/data/2.5/forecast?q=beijing,3166-2:US&appid=8982a42a6477a74e077b12cf8fcc5a06").then(function(data){
+    $http.get("http://api.openweathermap.org/data/2.5/forecast?q=denver,3166-2:US&appid=8982a42a6477a74e077b12cf8fcc5a06").then(function(data){
         // $scope.view.fiveWeatherObj = data;
         var rawData = data.data.list;
         var forecast = [];
@@ -10,7 +10,7 @@ var app = angular.module("fiveDayWeather", [])
             var conditionImage = "clear";
             //console.log(rawData[i]);
             var date = rawData[i].dt_txt.substring(0, 10);
-            console.log("index of fool!!!", rawData[i].dt_txt)
+            // console.log("index of fool!!!", rawData[i].dt_txt)
             var time = rawData[i].dt_txt.substring(11, 13);
             var description = rawData[i].weather[0].description;
             var temp = kelvinToFar(rawData[i].main.temp);
@@ -26,7 +26,7 @@ var app = angular.module("fiveDayWeather", [])
                 thisDayObj.times = [];
                 var high = -100;
                 var low = 100;
-                console.log("this is the undefined snow 3h", rawData[i].snow)
+                console.log("this is the undefined snow 3h", rawData[i].snow, "this is rain ", rawData[i].snow)
                 if(rawData[i].rain){
                     var precipitation = isNaN(mmRaintoInches(rawData[i].rain["3h"])) ? 0 :  mmRaintoInches(rawData[i].rain["3h"]);
                     conditionImage = "rain";
@@ -37,12 +37,15 @@ var app = angular.module("fiveDayWeather", [])
                 else {
                     conditionImage = "clear"
                 }
-                console.log(conditionImage)
+                // console.log(conditionImage)
                 if(high === undefined || high < temp){
                     high = temp;
+                    console.log("setting init high: ", high)
                 }
                 if(low === undefined || low > temp){
                     low = temp;
+                    console.log("setting init low: ", low)
+
                 }
                 thisDayObj.date = date;
                 thisDayTime.time = time;
@@ -59,7 +62,7 @@ var app = angular.module("fiveDayWeather", [])
                 forecast.push(thisDayObj);
             // if the date of this iteration already exists in forecast array, add thisTimeObj to thisDayObj.times array to represent a new time in the already existing day.
             } else if(rawData[i].dt_txt.substring(0, 10) === forecast[forecast.length - 1].date) {
-              console.log("this is breaking: ", rawData[i])
+              // console.log("this is breaking: ", rawData[i])
 
                 if(rawData[i].rain){
                     precipitation = isNaN(mmRaintoInches(rawData[i].rain["3h"])) ? 0 :  mmRaintoInches(rawData[i].rain["3h"]);
@@ -69,16 +72,27 @@ var app = angular.module("fiveDayWeather", [])
                 }
                 if(high < temp){
                     high = temp;
+                    console.log("NOT INIT resetting temp high to: ", high)
+                } else if(low > temp){
+                  console.log("low was: ", low, "temp was: ", temp)
+                  low = temp;
+                  console.log("NOT INIT resetting temp low to: ", low, "and temp is ", temp)
                 }
-                if(low > temp){
-                    low = temp;
-                }
+                // console.log("low was: ", low, "temp was: ", temp)
+                //
+                // if(low > temp){
+                //     console.log("low was: ", low, "temp was: ", temp)
+                //     low = temp;
+                //     console.log("NOT INIT resetting temp low to: ", low, "and temp is ", temp)
+                //
+                // }
                 thisDayTime.time = time;
                 thisDayTime.icon = icon;
                 thisDayTime.description = description;
                 thisDayTime.wind = {degree: windDegree, speed: windSpeed,};
                 thisDayTime.temp = temp;
                 thisDayTime.precipitation = precipitation === undefined ? 0 : precipitation;
+                console.log("writing temps to thisDayObj, high is: ", high, "low is ", low, "and actual temp is: ", temp)
                 thisDayTime.high = high;
                 thisDayTime.low = low;
 
