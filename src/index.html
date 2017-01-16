@@ -16,6 +16,13 @@
         <div class="flexContainer">
             <div class="weatherColumn" ng-repeat="data in view.forecast">
                 <div><h3 class="date">{{data.date}}</h3></div>
+                <div>
+                    <!-- {{if data.conditionImage === "snow"}}
+                    <img src="http://media.gettyimages.com/videos/snowing-animation-loop-video-id163681818?s=640x640" alt="">
+                    {{/if}} -->
+                    {{data.times[data.times.length - 1].high}}/{{data.times[data.times.length - 1].low}}
+
+                </div>
                 <div ng-repeat="info in data.times" class="repeatInfo">
                     <div class="dailyDetails">
                         <div class="time"><h3>{{info.time}}:00   <span class="temp">{{info.temp}}°</span></h3></div>

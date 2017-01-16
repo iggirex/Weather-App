@@ -18,15 +18,27 @@ var app = angular.module("fiveDayWeather", [])
             var thisDayObj = {};
             var thisDayTime = {};
 
+
             // if the date of this iteration is new to forecast array, create a thisDayObj to represent a new day and thisDayTime to represent the first of the times in this day and its info.
             if(forecast.length === 0 || date !== forecast[forecast.length - 1].date){
                 thisDayObj.times = [];
+                var high = -100;
+                var low = 100;
                 if(rawData[i].rain){
                     var precipitation = isNaN(mmRaintoInches(rawData[i].rain["3h"])) ? 0 :  mmRaintoInches(rawData[i].rain["3h"]);
+                    var conditionImage = "rain";
                 }
                 if(rawData[i].snow){
                     precipitation = isNaN(mmRaintoInches(rawData[i].snow["3h"])) ? 0 :  mmRaintoInches(rawData[i].snow["3h"]);
+                    conditionImage = "snow";
                 }
+                // if(high === undefined || high < temp){
+                //     high = temp;
+                //     console.log(high)
+                // }
+                // if(low === undefined || low > temp){
+                //     low = temp;
+                // }
                 thisDayObj.date = date;
                 thisDayTime.time = time;
                 thisDayTime.description = description;
@@ -35,6 +47,7 @@ var app = angular.module("fiveDayWeather", [])
                 thisDayTime.temp = temp;
                 thisDayTime.precipitation = precipitation === undefined ? 0 : precipitation;
                 thisDayObj.times.push(thisDayTime);
+                thisDayObj.conditionImage = conditionImage;
 
                 forecast.push(thisDayObj);
             // if the date of this iteration already exists in forecast array, add thisTimeObj to thisDayObj.times array to represent a new time in the already existing day.
@@ -45,12 +58,25 @@ var app = angular.module("fiveDayWeather", [])
                 if(rawData[i].snow){
                     precipitation = isNaN(mmRaintoInches(rawData[i].snow["3h"])) ? 0 :  mmRaintoInches(rawData[i].snow["3h"]);
                 }
+                console.log("before final temp conditional, high is: ", high, "low is :", low)
+                if(high < temp){
+                    high = temp;
+                    console.log("reassign high ", high)
+                }
+                if(low > temp){
+                    low = temp;
+                    console.log("reassinging low", low)
+                }
+                console.log("AA444AAFFTERRRR33# final temp conditional, high is: ", high, "low is :", low)
                 thisDayTime.time = time;
                 thisDayTime.icon = icon;
                 thisDayTime.description = description;
                 thisDayTime.wind = {degree: windDegree, speed: windSpeed,};
                 thisDayTime.temp = temp;
                 thisDayTime.precipitation = precipitation === undefined ? 0 : precipitation;
+                console.log("putting in the thisDayObj high:  ",high, "and low: ", low)
+                thisDayTime.high = high;
+                thisDayTime.low = low;
 
                 forecast[forecast.length - 1].times.push(thisDayTime);
                 $scope.view.forecast = forecast;
