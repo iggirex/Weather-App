@@ -55,6 +55,7 @@ html {
 }
 body {
     height: 100%;
+    width: 100%;
     background-image: url("https://s-media-cache-ak0.pinimg.com/originals/cd/96/10/cd9610bb19ba301dfecc7aa7b254dd0d.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -72,20 +73,24 @@ body {
 }
 .flexContainer {
     display: flex;
-    min-width: 600px;
-  	min-height: calc(690px * (90/150));
+    /*min-width: 600px;*/
+  	/*min-height: calc(690px * (90/150));*/
   	height: 90vh;
+
     /*this below was messing up app on Firefox ????*/
     /*display: -moz-box;
     display: -ms-flexbox;*/
+
     justify-content: space-between;
-    overflow: scroll;
+    /*overflow: scroll;
+    flex-direction: row;*/
 }
 .weatherColumn {
-    min-width: 0;
+    display: flex;
     width: 40%;
+    min-width: 80px;
+    display: flex;
     margin: 10px;
-    display: block;
     color: white;
 }
 .repeatInfo {

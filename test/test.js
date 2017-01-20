@@ -45,5 +45,4 @@ describe("millimeter convertion to inches", function(){
     it("returns conversion of millimeters to inches", function(){
         logic._test.mmRaintoInches(5000).should.equal(196.85);
     });
-
 });

@@ -12,6 +12,6 @@ gulp.task("eslint", function(){
 gulp.task("mocha", function(){
   gulp.src("test/test.js", {read: false})
   .pipe(mocha({reporter: "nyan"}))
-})
+});
 
 gulp.task("default", ["eslint", "mocha"], function(){});
