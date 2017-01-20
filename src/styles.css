@@ -58,7 +58,6 @@ body {
     width: 100%;
     background-image: url("https://s-media-cache-ak0.pinimg.com/originals/cd/96/10/cd9610bb19ba301dfecc7aa7b254dd0d.jpg");
     background-size: cover;
-    background-repeat: no-repeat;
 }
 .navbar {
     width: 100%;
@@ -73,7 +72,6 @@ body {
 }
 .flexContainer {
     display: flex;
-    /*min-width: 600px;*/
   	/*min-height: calc(690px * (90/150));*/
   	height: 90vh;
 
@@ -82,14 +80,13 @@ body {
     display: -ms-flexbox;*/
 
     justify-content: space-between;
-    /*overflow: scroll;
-    flex-direction: row;*/
+    /*overflow: scroll;*/
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 .weatherColumn {
-    display: flex;
     width: 40%;
-    min-width: 80px;
-    display: flex;
+    max-width: 35vh;
     margin: 10px;
     color: white;
 }

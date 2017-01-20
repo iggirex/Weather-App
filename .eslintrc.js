@@ -5,6 +5,7 @@ module.exports = {
         "linebreak-style": ["error", "unix"],
         "quotes": ["error", "double"],
         "semi": ["error", "always"],
+        "no-unused-vars": "off",
 
         "comma-dangle": ["error", "always"],
         "no-cond-assign": ["error", "always"],
@@ -15,6 +16,7 @@ module.exports = {
         "browser": true,
         "node": true,
         "mocha": true,
+        "es6": true,
     },
     "plugins": [
         "angular"

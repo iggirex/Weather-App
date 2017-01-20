@@ -10,7 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 </head>
 <body ng-app>
-    <div class="navbar"><div class="navItem">Stockholm 5 Day Weather</div><div class="navItem" style="float:right;">iggirex@gmail.com</div></div>
+    <div class="navbar"><div class="navItem">Denver 5 Day Weather</div><div class="navItem" style="float:right;">iggirex@gmail.com</div></div>
 
     <div ng-controller="apiController" class="apiController">
         <div class="flexContainer">
@@ -29,7 +29,9 @@
                         <div class="time"><h3>{{info.time}}:00   <span class="temp">{{info.temp}}°</span></h3></div>
                         <div class="cardInfo"></div>
                     </div>
-                    <div class="info" ><i class="fa fa-camera-retro"></i> {{info.description}} <span ng-show="info.precipitation" class="precipitation">&#x2602{{info.precipitation}} in</span> </div>
+                    <div class="info" >{{info.description}}
+                        <!-- <span ng-show="info.precipitation" class="precipitation">&#x2602{{info.precipitation}}in</span>  -->
+                    </div>
                 </div>
             </div>
         </div>
